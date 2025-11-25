@@ -78,6 +78,7 @@ a{display:inline-block;margin-top:16px;padding:10px 20px;font-size:16px;text-dec
 });
 
 // ✅ Chráněný endpoint s tlačítkem Logout
+
 app.get('/', requireAuth, (req, res) => {
   res.set({
     'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
@@ -95,23 +96,21 @@ body{font-family:Arial,sans-serif;text-align:center;margin-top:50px}
 h1{font-size:3em;color:green}
 .actions{margin-top:24px}
 button{padding:10px 20px;font-size:16px;cursor:pointer}
-a{display:inline-block;margin-top:12px;padding:10px 20px;font-size:16px;text-decoration:none;border:1px solid #ccc}
-form{display:inline-block}
+a{display:inline-block;margin-left:10px;padding:10px 20px;font-size:16px;text-decoration:none;border:1px solid #ccc}
 </style>
 </head>
 <body>
 <h1>SUCCESS</h1>
 <div class="actions">
-  <!-- Formulář pro GET na /logout -->
   /logout
     <button type="submit">Logout</button>
   </form>
-  <!-- Alternativně odkaz -->
   /logoutLogout</a>
 </div>
 </body>
 </html>`);
 });
+
 
 // Health check pro Render
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
