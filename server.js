@@ -50,3 +50,10 @@ const port = process.env.PORT || 10000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+
+// Přidat nový endpoint pro odhlášení
+app.get('/logout', (req, res) => {
+  res.set('WWW-Authenticate', 'Basic realm="Restricted"');
+  res.status(401).send('<h1 style="color:red;text-align:center;">You have been logged out</h1>');
+});
