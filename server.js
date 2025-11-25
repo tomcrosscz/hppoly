@@ -39,7 +39,8 @@ function requireAuth(req, res, next) {
 }
 
 
- Protected endpoint that returns SUCCESS when authorized
+
+// Protected endpoint that returns SUCCESS when authorized
 app.get('/', requireAuth, (req, res) => {
   // Anti-cache, aby se po odhlášení nepoužil starý obsah z cache
   res.set({
@@ -71,6 +72,7 @@ app.get('/', requireAuth, (req, res) => {
 </body>
 </html>`);
 });
+
 
 
 // Health check endpoint (unprotected) for Render
