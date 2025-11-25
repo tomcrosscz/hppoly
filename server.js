@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// Povolit CORS pro všechny (pokud TC10 vyžaduje)
+// Povolit CORS
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -77,7 +77,7 @@ a{display:inline-block;margin-top:16px;padding:10px 20px;font-size:16px;text-dec
 </html>`);
 });
 
-// ✅ Chráněný endpoint s odkazem Logout
+// ✅ Chráněný endpoint s funkčním tlačítkem Logout
 app.get('/', requireAuth, (req, res) => {
   res.set({
     'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
@@ -94,13 +94,15 @@ app.get('/', requireAuth, (req, res) => {
 body{font-family:Arial,sans-serif;text-align:center;margin-top:50px}
 h1{font-size:3em;color:green}
 .actions{margin-top:24px}
-a{display:inline-block;margin-top:12px;padding:10px 20px;font-size:16px;text-decoration:none;border:1px solid #ccc;background:#eee}
+button{padding:10px 20px;font-size:16px;cursor:pointer}
 </style>
 </head>
 <body>
 <h1>SUCCESS</h1>
 <div class="actions">
-  /logoutLogout</a>
+  /logout
+    <button type="submit">Logout</button>
+  </form>
 </div>
 </body>
 </html>`);
