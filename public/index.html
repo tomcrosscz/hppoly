@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AV Control Test</title>
+<style>
+body { font-family: Arial; text-align: center; margin-top: 100px; }
+input { padding: 10px; margin: 5px; }
+button { padding: 10px 20px; }
+h1 { font-size: 48px; }
+</style>
+</head>
+<body>
+<h1>Login</h1>
+<input id="u" placeholder="Username"><br>
+<input id="p" type="password" placeholder="Password"><br>
+<button onclick="login()">Submit</button>
+<h1 id="out"></h1>
+<script>
+async function login() {
+  let res = await fetch('/auth', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({u:document.getElementById('u').value, p:document.getElementById('p').value})
+  });
+  let t = await res.text();
+  document.getElementById('out').innerText = t;
+}
+</script>
+</body>
+</html>
