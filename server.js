@@ -3,9 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// Povolit CORS pro všechny (pokud TC10 vyžaduje)
+// Povolit CORS
 app.use(cors({
- origin: '*',
+  origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
@@ -51,7 +51,7 @@ h1{font-size:3em;color:#c00}
 </html>`);
 }
 
-// ✅ Logout endpoint – musí být NECHRÁNĚNÝ
+// ✅ Logout endpoint – NECHRÁNĚNÝ
 app.get('/logout', (req, res) => {
   res.set({
     'WWW-Authenticate': 'Basic realm="Restricted"',
@@ -92,3 +92,31 @@ app.get('/', requireAuth, (req, res) => {
 <title>SUCCESS</title>
 <style>
 body{font-family:Arial,sans-serif;text-align:center;margin-top:50px}
+h1{font-size:3em;color:green}
+.actions{margin-top:24px}
+button{padding:10px 20px;font-size:16px;cursor:pointer}
+a{display:inline-block;margin-top:12px;padding:10px 20px;font-size:16px;text-decoration:none;border:1px solid #ccc}
+form{display:inline-block}
+</style>
+</head>
+<body>
+<h1>SUCCESS</h1>
+<div class="actions">
+  <!-- Formulář pro GET na /logout -->
+  /logout
+    <button type="submit">Logout</button>
+  </form>
+  <!-- Alternativně odkaz -->
+  /logoutLogout</a>
+</div>
+</body>
+</html>`);
+});
+
+// Health check pro Render
+app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
+
+const port = process.env.PORT || 10000;
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
