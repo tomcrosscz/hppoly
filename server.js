@@ -36,13 +36,14 @@ function checkBasicAuth(req) {
 }
 
 // Úvodní stránka s formulářem
+
 app.get('/', (req, res) => {
-  // Pokud je automatická autentizace přes Basic Auth
-  if (checkBasicAuth(req)) {
+  const auth = parseBasicAuth(req.headers['authorization']);
+  if (auth && auth.user === VALID_USER && auth.pass === VALID_PASS) {
     return sendSuccessPage(res);
   }
 
-  // Jinak zobrazíme formulář
+  // Pokud není validní Basic Auth → zobrazíme formulář
   res.send(`<!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +59,7 @@ button{padding:10px 20px;font-size:16px;cursor:pointer}
 </head>
 <body>
 <h1>HP Poly AV Control Access</h1>
-<form method="POST" action="/login">
+/login
 <input type="text" name="username" placeholder="Username" required><br>
 <input type="password" name="password" placeholder="Password" required><br>
 <button type="submit">Login</button>
@@ -66,6 +67,7 @@ button{padding:10px 20px;font-size:16px;cursor:pointer}
 </body>
 </html>`);
 });
+
 
 // Zpracování formuláře
 app.post('/login', (req, res) => {
