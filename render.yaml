@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: avcontrol-basic-auth
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: BASIC_USER
+        value: AVControl
+      - key: BASIC_PASS
+        value: 123
