@@ -83,8 +83,7 @@ app.listen(port, () => {
 
 
 
-
-/ Logout — vynutí znovupřihlášení pomocí 401 + WWW-Authenticate
+// Logout — vynutí znovupřihlášení pomocí 401 + WWW-Authenticate
 app.get('/logout', (req, res) => {
   res.set('WWW-Authenticate', 'Basic realm="Restricted"');
   res.status(401).send(`<!DOCTYPE html>
@@ -104,4 +103,3 @@ app.get('/logout', (req, res) => {
 </body>
 </html>`);
 });
-
