@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-// Povolit CORS
+// Povolit CORS pro všechny (pokud TC10 vyžaduje)
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
@@ -67,7 +67,7 @@ app.get('/logout', (req, res) => {
 <style>
 body{font-family:Arial,sans-serif;text-align:center;margin-top:50px}
 h1{font-size:2em;color:#c00}
-a{display:inline-block;margin-top:16px;padding:10px 20px;font-size:16px;text-decoration:none;border:1px solid #ccc}
+a{display:inline-block;margin-top:16px;padding:10px 20px;font-size:16px;text-decoration:none;border:1px solid #ccc;background:#eee}
 </style>
 </head>
 <body>
@@ -77,8 +77,7 @@ a{display:inline-block;margin-top:16px;padding:10px 20px;font-size:16px;text-dec
 </html>`);
 });
 
-// ✅ Chráněný endpoint s tlačítkem Logout
-
+// ✅ Chráněný endpoint s odkazem Logout
 app.get('/', requireAuth, (req, res) => {
   res.set({
     'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
@@ -95,22 +94,17 @@ app.get('/', requireAuth, (req, res) => {
 body{font-family:Arial,sans-serif;text-align:center;margin-top:50px}
 h1{font-size:3em;color:green}
 .actions{margin-top:24px}
-button{padding:10px 20px;font-size:16px;cursor:pointer}
-a{display:inline-block;margin-left:10px;padding:10px 20px;font-size:16px;text-decoration:none;border:1px solid #ccc}
+a{display:inline-block;margin-top:12px;padding:10px 20px;font-size:16px;text-decoration:none;border:1px solid #ccc;background:#eee}
 </style>
 </head>
 <body>
 <h1>SUCCESS</h1>
 <div class="actions">
-  /logout
-    <button type="submit">Logout</button>
-  </form>
   /logoutLogout</a>
 </div>
 </body>
 </html>`);
 });
-
 
 // Health check pro Render
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
