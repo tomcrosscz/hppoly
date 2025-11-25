@@ -38,10 +38,40 @@ function requireAuth(req, res, next) {
   res.status(401).send(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>ACCESS DENIED</title><style>body{font-family:Arial,sans-serif;text-align:center;margin-top:50px}h1{font-size:3em;color:#c00}</style></head><body><h1>ACCESS DENIED</h1></body></html>`);
 }
 
-// Protected endpoint that returns SUCCESS when authorized
+
+ Protected endpoint that returns SUCCESS when authorized
 app.get('/', requireAuth, (req, res) => {
-  res.status(200).send(`<!DOCTYPE html><html><head><meta charset="utf-8"><title>SUCCESS</title><style>body{font-family:Arial,sans-serif;text-align:center;margin-top:50px}h1{font-size:3em;color:green}</style></head><body><h1>SUCCESS</h1></body></html>`);
+  // Anti-cache, aby se po odhlášení nepoužil starý obsah z cache
+  res.set({
+    'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+    'Pragma': 'no-cache',
+    'Expires': '0'
+  });
+
+  res.status(200).send(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SUCCESS</title>
+  <style>
+    body{font-family:Arial,sans-serif;text-align:center;margin-top:50px}
+    h1{font-size:3em;color:green}
+    .actions{margin-top:24px}
+    button{padding:10px 20px;font-size:16px;cursor:pointer}
+    form{display:inline-block}
+  </style>
+</head>
+<body>
+  <h1>SUCCESS</h1>
+  <div class="actions">
+    /logout
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+</body>
+</html>`);
 });
+
 
 // Health check endpoint (unprotected) for Render
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
@@ -52,8 +82,26 @@ app.listen(port, () => {
 });
 
 
-// Přidat nový endpoint pro odhlášení
+
+
+/ Logout — vynutí znovupřihlášení pomocí 401 + WWW-Authenticate
 app.get('/logout', (req, res) => {
   res.set('WWW-Authenticate', 'Basic realm="Restricted"');
-  res.status(401).send('<h1 style="color:red;text-align:center;">You have been logged out</h1>');
+  res.status(401).send(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Logged out</title>
+  <style>
+    body{font-family:Arial,sans-serif;text-align:center;margin-top:50px}
+    h1{font-size:2em;color:#c00}
+    a{display:inline-block;margin-top:16px}
+  </style>
+</head>
+<body>
+  <h1>You have been logged out</h1>
+  /Back to home</a>
+</body>
+</html>`);
 });
+
