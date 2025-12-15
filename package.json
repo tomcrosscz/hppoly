@@ -1,0 +1,15 @@
+{
+  "name": "hp-poly-av-control-dualmode-boot",
+  "version": "1.0.0",
+  "description": "HP Poly AV Control Dual-mode using dynamic boot.js (no inline scripts), suitable for TC10 webview.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "helmet": "^7.0.0"
+  }
+}
