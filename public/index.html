@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HP Poly AV Control Access</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>HP Poly AV Control Access</h1>
+
+    <div id="login-section">
+      <p class="hint">
+        <strong>Režimy:</strong>
+        <ol>
+          <li><em>TC10 Authorization = None</em> → manuální přihlášení přes formulář a SEND.</li>
+          <li><em>TC10 Authorization = Username &amp; Password</em> → automatická autentizace při načtení stránky.</li>
+        </ol>
+      </p>
+
+      <form id="login-form">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required />
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+
+        <button id="send-btn" type="submit">SEND</button>
+      </form>
+    </div>
+
+    <div id="status-section" class="hidden">
+      <div id="status-banner" class="banner"></div>
+      <div id="countdown" class="countdown"></div>
+      <div id="restart-note" class="blink"></div>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "hp-poly-av-control-dualmode",
+  "version": "1.0.0",
+  "description": "HP Poly AV Control access page (Dual-mode) for TC10: manual when Authorization=None, auto when Username&Password.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "helmet": "^7.0.0"
+  }
+}

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: hp-poly-av-control-dualmode
+    env: node
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "node server.js"
+    autoDeploy: true
+    envVars:
+      - key: BASIC_USER
+        value: admin
+      - key: BASIC_PASS
+        value: changeme
+      - key: ALLOWED_ORIGINS
+        value: "*"
